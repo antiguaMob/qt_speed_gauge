@@ -1,7 +1,6 @@
 #include "cancommunication.h"
 
 #include <QCanBus>
-#include <QCanBusFrame>
 
 /*
  * CANCommunicaion constructor
