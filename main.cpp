@@ -11,11 +11,11 @@ int main(int argc, char *argv[])
     CANCommunication canCom;
 
     QQmlApplicationEngine engine;
-    engine.load(QUrl(QLatin1String("qrc:/qml/main.qml")));
 
     /* Enable CANCommunication canCom object on qml */
-    engine.rootContext()->setContextProperty("CANCommunication",
-                                             &canCom);
+    engine.rootContext()->setContextProperty("CANCommunication", &canCom);
+
+    engine.load(QUrl(QLatin1String("qrc:/qml/main.qml")));
 
     return a.exec();
 }
