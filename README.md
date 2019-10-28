@@ -1,8 +1,8 @@
 # Index
 1. [Introduction](#introduction)
 2. [Setup virtual CAN](#setup-virtual-can)
-3. [Compilation](#compile)
-4. [Run the application](#run-the-aplicattion)
+3. [Compilation](#compilation)
+4. [Run the application](#run-the-application)
 
 # Introduction
 
