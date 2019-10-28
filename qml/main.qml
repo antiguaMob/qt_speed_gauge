@@ -368,16 +368,24 @@ ApplicationWindow {
             enabled: false
             anchors.verticalCenter: parent.verticalCenter
             onClicked:  {
+                // Function to create random hex array
                 function randomArray(length, max) {
                     return Array.apply(null, new Array(length)).map(function() {
-                        return Math.round(Math.random() * max);
+                        var randNum = Math.round(Math.random() * max)
+                        // randNum to hex string
+                        return ("00" + randNum.toString(16)).substr(-2)
                     });
                 }
+
+                // Random frame id
                 var frameId = Math.floor(Math.random() * 255)
+                // Random payload length [1,8]
                 var arrayLen =  Math.floor(Math.random() * (9 - 1)) + 1
                 var myArray = randomArray(arrayLen, 255)
-                CANCommunication.sendFrame(frameId, myArray)
-                frame_id_random.text = frameId.toString()
+                // Send frame to c++
+                CANCommunication.sendFrame(frameId, myArray.join(''))
+                // Update GUI with hex values sent
+                frame_id_random.text = ("00" + frameId.toString(16)).substr(-2)
                 data_random.text = myArray.toString()
             }
         }

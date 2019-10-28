@@ -3,18 +3,19 @@
 
 #include <QObject>
 #include <QCanBusDevice>
-#include <QVariantList>
 
 class CANCommunication : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit CANCommunication(QObject *parent = 0);
+    explicit CANCommunication(QObject *parent = nullptr);
+    ~CANCommunication();
+
     // Invokable so it can be called from QML
     Q_INVOKABLE void connectDevice(const QString &interface);
     Q_INVOKABLE void disconnectDevice();
-    Q_INVOKABLE void sendFrame(const quint32 frameId, const QVariantList payload);
+    Q_INVOKABLE void sendFrame(const quint32 frameId, const QString payload);
 
 private Q_SLOTS:
     void checkMessages();

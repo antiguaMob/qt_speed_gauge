@@ -1,0 +1,7 @@
+*.stash
+Makefile
+qmake_qmake_immediate.qrc
+*.o
+can
+moc_*
+qrc_*

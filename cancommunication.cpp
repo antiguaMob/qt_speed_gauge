@@ -8,6 +8,14 @@
 CANCommunication::CANCommunication(QObject *parent) : QObject(parent) {}
 
 /*
+ *
+ */
+CANCommunication::~CANCommunication()
+{
+    disconnectDevice();
+}
+
+/*
  * Communicate CAN bus error to user.
  *
  * @param error     Error type.
@@ -67,9 +75,12 @@ void CANCommunication::disconnectDevice()
     if (!m_canDevice)
         return;
 
-    m_canDevice->disconnectDevice();
-    delete m_canDevice;
-    m_canDevice = nullptr;
+    /* Check if there is an active connection */
+    if (m_canDevice->state() == QCanBusDevice::ConnectedState) {
+        m_canDevice->disconnectDevice();
+        delete m_canDevice;
+        m_canDevice = nullptr;
+    }
 }
 
 /*
@@ -106,7 +117,7 @@ void CANCommunication::checkMessages()
             emit notifyErr(m_canDevice->interpretErrorFrame(frame));
 
         if (isFrameValidSpeed(frame))
-            emit currSpeed((unsigned int)frame.payload()[0]);
+            emit currSpeed(static_cast<unsigned int>(frame.payload()[0]));
     }
 }
 
@@ -116,18 +127,15 @@ void CANCommunication::checkMessages()
  * @param frameId   Frame id of the message to be sent
  * @param payload   Data to be sent
  */
-void CANCommunication::sendFrame(const quint32 frameId, const QVariantList payload)
+void CANCommunication::sendFrame(const quint32 frameId, const QString payload)
 {
     if (!m_canDevice) {
         emit notifyErr("Cannot send frames, try connecting with the CAN bus first.");
         return;
     }
 
-    /* Convert QVariantList to QByteArray */
-    QByteArray framePayload;
-    foreach (QVariant item, payload) {
-        framePayload.append(item.toInt());
-    }
+    /* Create payload */
+    const QByteArray framePayload = QByteArray::fromHex(payload.toLatin1());
 
     /* Create frame to be sent */
     QCanBusFrame frame = QCanBusFrame(frameId, framePayload);

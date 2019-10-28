@@ -22,6 +22,7 @@ As described [here](https://elinux.org/Bringing_CAN_interface_up#Virtual_Interfa
  $ sudo ip link set up vcan0
 ```
 
+Install [can-utils](https://elinux.org/Can-utils) following the instructions on the link.
 Run the script [generate_speed_values.sh](generate_speed_values.sh) to generate speed values. For this application, any value with frame id 0x123 is considered as a speed value.
 
 ---
@@ -67,6 +68,12 @@ Once compiled, just run the **can** executable.
 ```
 $ ./can
 ```
+
+To verify that frames are written into the CAN bus, candump from can-utils can be used,
+```
+$ candump vcan0
+```
+
 ---
 **NOTE**
 
