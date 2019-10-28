@@ -32,7 +32,8 @@ private:
 Q_SIGNALS:
      void currSpeed(unsigned int speed);
      void notifyErr(QString str);
-
+     void canConnected();
+     void canDisconnected();
 };
 
 #endif // CANCOMMUNICATION_H

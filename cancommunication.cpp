@@ -50,7 +50,10 @@ void CANCommunication::connectDevice(const QString &interface)
         emit notifyErr(m_canDevice->errorString());
         delete m_canDevice;
         m_canDevice = nullptr;
+        return;
     }
+    /* Notify QML of disconnection */
+    emit canConnected();
 }
 
 /*
@@ -58,6 +61,9 @@ void CANCommunication::connectDevice(const QString &interface)
  */
 void CANCommunication::disconnectDevice()
 {
+    /* Notify QML of disconnection */
+    emit canDisconnected();
+
     if (!m_canDevice)
         return;
 

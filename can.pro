@@ -1,4 +1,4 @@
-QT += serialbus widgets qml quick quickwidgets
+QT += serialbus  quickwidgets
 
 TARGET = can
 TEMPLATE = app
