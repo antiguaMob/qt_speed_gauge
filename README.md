@@ -8,8 +8,8 @@
 
 This application receives simulated speed values over a virtual CAN bus using the class [QCanBusDevice](https://doc.qt.io/qt-5/qcanbusdevice.html).
 
-It was developed using the following versions,
-- Qt 5.13.1 
+It was developed using,
+- Qt 5.13.1
 - Ubuntu 18.04.3 LTS
 - Qt Creator 4.10.1
 
@@ -42,7 +42,7 @@ $ qmake can.pro
 ```
 
 
-Then, run make to compile the application,
+Then, run *make* to compile the application,
 ```
 $ make
 ```
@@ -76,3 +76,7 @@ Make sure the **can** application is executable,
 $ chmod +x can
 ```
 ---
+
+The application should look like this image,
+
+![](img/preview.png)
